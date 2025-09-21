@@ -1,0 +1,20 @@
+@function opacityColors ($red, $green, $blue)
+    $colors()
+    @for $i from 1 through 10
+        $alpha: $i * 0.1
+        $color: rgba($red, $green, $blue, $alpha)
+        $colors: append($colors, $color)
+    @return $colors
+
+@mixin default-display (
+    $display,
+    $direction,
+    $j-content,
+    $a-items,
+    $isBorder
+)
+    position: relative
+    display: #{$display}
+    flex-direction: #{$direction}
+    justify-content: #{$j-content}
+    align-items: #{$a-items}
