@@ -1,0 +1,57 @@
+Schema delle tabelle in cui effettuare operazioni CRUD:
+    1. Tabella principale
+    create table FreelanceTable (
+	    freelanceID int primary key,
+        businessYearStart date not null,
+        businessYearEnd date not null,
+        companyStart date not null,
+        companyEnd date not null
+    );
+
+    2. Tabella registro Freelance 
+    create table FreelanceRegistry (
+        freelanceRegistryID int primary key,
+        nameUser varchar(20) not null,
+        lastNameUser varchar(20) not null,
+        taxID varchar(50) not null,
+        vatNumber varchar(20) not null,
+        birthUser date not null,
+        birthCityUser varchar(100) not null,
+        countryUser varchar(100) not null,
+        emailUser varchar(100) not null,
+        passwordUser varchar(20) not null,
+        foreign key (freelanceRegistryID) references FreelanceTable(freelanceID)
+    );
+
+    3. Tabella dati e costi del Freelance
+    create table businessData (
+        businessDataID int primary key,
+        taxable int not null,
+        vat int not null,
+        total int not null,
+        foodExpense int,
+        personnellExpense int,
+        variousExpense int,
+        dailyFee int,
+        monthlyFee int,
+        monthlyPayment int,
+        monthlyDivisiblePayment int,
+        ordinaryRegime boolean not null,
+        forfaitRegime boolean not null,
+        simplifiedRegime boolean not null,
+        foreign key (businessDataID) references FreelanceRegistry(freelanceRegistryID)
+    );
+
+    4. Tabella per il salvataggio delle fatture
+    create table invoiceTable (
+        invoiceID int primary key,
+        taxable int not null,
+        vat int not null,
+        total int not null,
+        foodExpense int,
+        variousExpense int,
+        stampExpense int,
+        print boolean,
+        invoiceDirection varchar(15) not null,
+        foreign key (invoiceID) references businessData(businessDataID)
+    );

@@ -1,0 +1,22 @@
+@use var from "../../../../sass/variables"
+    
+.style_table
+    position: relative
+    display: flex
+    flex-direction: row
+    justify-content: center
+    min-height: 100%
+    min-width: 100%
+    overflow-y: scroll
+    @if (var.$isBorder)
+        border: 2px solid blue
+
+.box_table
+    position: relative
+    display: flex
+    flex-direction: row
+    height: auto
+    min-height: 100%
+    width: 100%
+    @if (var.$isBorder)
+        border: 2px solid red
