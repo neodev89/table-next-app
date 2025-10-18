@@ -1,32 +1,24 @@
-type FreelanceTableProps = {
-    freelanceID: string;
-    businessYearStart: Date;
-    businessYearEnd: Date;
-    companyStart: Date;
-    companyEnd: Date;
-};
-
-type FreelanceRegistryProps = {
+type FreelanceRegistry = {
     freelanceRegistryID: string;
     nameUser: string;
     lastNameUser: string;
-    taxID: number;
+    taxID: string;
     vatNumber: string;
-    birthDate: Date;
+    birthUser: Date;
     birthCityUser: string;
     countryUser: string;
     emailUser: string;
     passwordUser: string;
-    foreignIDFreelanceTable?: number;
 };
 
-type businessData = {
+type BusinessData = {
     businessDataID: string;
     taxable: number;
     vat: number;
     total: number;
     foodExpense: number;
     personnellExpense: number;
+    variousExpense: number;
     dailyFee: number;
     monthlyFee: number;
     monthlyPayment: number;
@@ -34,25 +26,31 @@ type businessData = {
     ordinaryRegime: boolean;
     forfaitRegime: boolean;
     simplifiedRegime: boolean;
-    foreignKeyBusinessData?: number; 
 };
 
-type invoiceTableProps = {
+type FreelanceTable = {
+    freelanceID: string;
+    businessYearStart: Date;
+    businessYearEnd: Date;
+    companyStart: Date;
+    companyEnd: Date;
+};
+
+type InvoiceTable = {
     invoiceID: string;
     taxable: number;
     vat: number;
-    totale: number;
+    total: number;
     foodExpense: number;
     variousExpense: number;
-    stampExpense: number;
+    stampExpense: boolean;
     print: boolean;
     invoiceDirection: string;
-    foreignKeyInvoiceID?: number;
 };
 
 export type {
-    FreelanceTableProps,
-    FreelanceRegistryProps,
-    businessData,
-    invoiceTableProps,
+    FreelanceTable,
+    FreelanceRegistry,
+    BusinessData,
+    InvoiceTable
 }
