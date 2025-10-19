@@ -1,3 +1,7 @@
+import { BusinessDataEntity } from '@/entity/businessData';
+import { FreelanceRegistryEntity } from '@/entity/freelanceRegistry';
+import { FreelanceTableEntity } from '@/entity/freelanceTable';
+import { InvoiceTableEntity } from '@/entity/invoiceTable';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
@@ -14,6 +18,7 @@ export const getInitializedAppData = async () => {
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
+        entities: [FreelanceTableEntity, FreelanceRegistryEntity, BusinessDataEntity, InvoiceTableEntity]
     });
 
     AppDataSource = await dataSource.initialize();
