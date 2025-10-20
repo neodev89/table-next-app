@@ -34,3 +34,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# Objective
+
+L'obiettivo dell'applicazione sarà quello di permettere ad ogni freelancer di calcolare quanto guadagnato e quanto guadagnare,
+quanto dovrà pagare in dichiarazione dei redditi e quanto accantonare 
+(facoltativo) per avere - come se fosse un subordinato - una mensilità simile alla tredicesima e una per simil TFR.
+
+# Stack
+
+Lo stack tecnologico prevede le seguenti:
+    - Next.js è il framework del progetto;
+    - TypeORM per gestire le modifiche a Database MySQL;
+    - MySQL sul quale sarà alloggiato il database;
+    - Zod per la validazione e il controllo dei campi;
+    - React Hook Form per la gestione dei form e il salvataggio        a front-end dei dati;
+    - Redux per la gestione degli stati globali;
+    - JsonWebToken per la creazione di token di accesso e mantenimento della sessione;
+    - UUID per la generazione di ID dinamici e sempre univoci;
+    - Material UI per una bella e user-friendly esperienza utente;
+    - tanstack query e axios per una migliore gestione delle chiamate alle API;
+    - bcrypt per l'hash sulle password;
+    - sass per un layout migliore e per stili con funzionalità potenti;
