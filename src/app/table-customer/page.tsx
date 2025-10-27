@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import style from "./style.module.sass";
 
-const DataGridTable: React.FC = () => {
+const TableUser: React.FC = () => {
 
     return (
         <Box className={style.containerTable}>
@@ -11,4 +11,4 @@ const DataGridTable: React.FC = () => {
     )
 };
 
-export default DataGridTable;
+export default TableUser;

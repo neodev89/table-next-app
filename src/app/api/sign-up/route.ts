@@ -6,8 +6,7 @@ import { getInitializedAppData } from "@/connection/data-source";
 import { FreelanceRegistryEntity } from "@/entity/freelanceRegistry";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { truncate } from "fs";
-
+import { getCookiesOptions } from "@/utils/getCookiesOptions";
 
 const signSecret = process.env.JWT_SECRET!;
 
@@ -62,12 +61,13 @@ export async function POST(req: Request) {
         storedCookies.set(
             "registered_token",
             token,
-            {
-                httpOnly: process.env.NODE_ENV == "development",
-                sameSite: "strict",
+            getCookiesOptions({
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: "lax",
                 path: "/",
                 maxAge: 2 * 24 * 60 * 60,
-            },
+            }),
         );
 
         return NextResponse.json({

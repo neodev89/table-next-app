@@ -1,8 +1,8 @@
+import 'reflect-metadata';
 import { BusinessDataEntity } from '@/entity/businessData';
 import { FreelanceRegistryEntity } from '@/entity/freelanceRegistry';
 import { FreelanceTableEntity } from '@/entity/freelanceTable';
 import { InvoiceTableEntity } from '@/entity/invoiceTable';
-import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
 let AppDataSource: DataSource | undefined = undefined;
