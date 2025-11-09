@@ -78,44 +78,53 @@ export default function Login({
                                     borderRadius: 4,
                                     p: 4,
                                 }}>
-                                    <Stack spacing={2} sx={{
-                                        height: '100%',
-                                        width: '100%',
-                                        border: `1px solid ${grey[400]}`,
-                                        borderRadius: 4,
-                                        backgroundColor: blue[100],
+                                    <Box sx={{
+                                        position: "relative",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        height: "100%",
+                                        width: "100%"
                                     }}>
-                                        <Box className={styles.chooseSign} sx={{
-                                            height: "4rem",
-                                            width: "100%",
+                                        <Stack spacing={2} sx={{
+                                            height: '100%',
+                                            width: '100%',
+                                            border: `3px solid ${grey[400]}`,
+                                            borderRadius: 4,
+                                            backgroundColor: blue[100],
+                                            justifyContent: "center",
                                         }}>
-                                            <Button
-                                                variant="contained"
-                                                size="small"
-                                                sx={{
-                                                    height: "2rem",
-                                                    maxWidth: "6rem",
-                                                    backgroundColor: sign === "sign-up" ? blue[900] : blue[400],
-                                                }}
-                                                onClick={() => setSign('sign-in')}
-                                            >
-                                                <strong>Sign In</strong>
-                                            </Button>
-                                            <Button
-                                                variant="outlined"
-                                                size="small"
-                                                sx={{
-                                                    height: "2rem",
-                                                    maxWidth: "6rem",
-                                                    backgroundColor: sign === "sign-in" ? red[900] : red[100],
-                                                    color: common.black
-                                                }}
-                                                onClick={() => setSign('sign-up')}
-                                            >
-                                                <strong>Sign Up</strong>
-                                            </Button>
-                                        </Box>
-                                        <Box>
+                                            <Box className={styles.chooseSign} sx={{
+                                                height: "4rem",
+                                                width: "100%",
+                                                border: "2px solid red",
+                                            }}>
+                                                <Button
+                                                    variant="contained"
+                                                    size="small"
+                                                    sx={{
+                                                        height: "2rem",
+                                                        maxWidth: "6rem",
+                                                        backgroundColor: sign === "sign-up" ? blue[900] : blue[400],
+                                                    }}
+                                                    onClick={() => setSign('sign-in')}
+                                                >
+                                                    <strong>Sign In</strong>
+                                                </Button>
+                                                <Button
+                                                    variant="outlined"
+                                                    size="small"
+                                                    sx={{
+                                                        height: "2rem",
+                                                        maxWidth: "6rem",
+                                                        backgroundColor: sign === "sign-in" ? red[900] : red[100],
+                                                        color: common.black
+                                                    }}
+                                                    onClick={() => setSign('sign-up')}
+                                                >
+                                                    <strong>Sign Up</strong>
+                                                </Button>
+                                            </Box>
+                                            <Box>
                                                 {
                                                     sign === "sign-in" ? (
                                                         <SignIn />
@@ -123,8 +132,10 @@ export default function Login({
                                                         <SignUp />
                                                     )
                                                 }
-                                        </Box>
-                                    </Stack>
+                                            </Box>
+                                           
+                                        </Stack>
+                                    </Box>
                                 </Box>
                             </Box>
                         </>

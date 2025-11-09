@@ -1,7 +1,7 @@
+import dataExtrapolation from "@/utils/dataExtrapolation";
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RegisterSchemaPayload, ReplaceStatePayload, ResetSchemaPayload, SetFieldPayload, zodState } from "./typeZodSchema";
-import dataExtrapolation from "@/utils/dataExtrapolation";
 
 const initialState: zodState = {};
 

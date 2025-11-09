@@ -3,7 +3,7 @@ import { common } from "@mui/material/colors";
 
 export const Items = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
-    padding: theme.spacing(0.5),
+    padding: theme.spacing(0),
     textAlign: 'center',
     color: `${common.white}`,
     ...theme.applyStyles("dark", {

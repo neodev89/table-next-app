@@ -1,32 +1,45 @@
+import { singInFreelance } from "@/global-state/freelanceSignIn";
 import styles from "./styles.module.sass";
-import { initializerSignInUser, SignInSchemaProps, signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
+import { initializerSignInUser, signInSchema, SignInSchemaProps, signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Stack, TextField } from "@mui/material";
+import { Box, Button, Stack, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { ControllerField } from "../controller-field/ControllerField";
+import { common } from "@mui/material/colors";
 
 export default function SignIn() {
 
     const dispatch = useDispatch();
 
-    const user = initializerSignInUser;
-    const [userSignIn, setUserSignIn] = useState<Partial<SignInSchemaProps>>({
-        email: user.email,
-        password: user.password,
-    });
-
-    const { control, handleSubmit } = useForm<SignUpSchemaProps>({
-        resolver: zodResolver(signUpSchema)
-    });
-
-    const onSubmit = () => {
-        console.log("I dati sono stati salvati");
+    const updateValues = (name: keyof SignUpSchemaProps, value: string | number) => {
+        dispatch(singInFreelance({ [name]: value } as SignInSchemaProps));
     }
+
+    const { control, handleSubmit } = useForm<SignInSchemaProps>({
+        resolver: zodResolver(signInSchema)
+    });
+
+    const handleSubmitReg = async (data: SignInSchemaProps) => {
+        dispatch(singInFreelance(data))
+        const req = await fetch("/api/sign-in", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        const res: SignInSchemaProps = await req.json();
+        console.log("I dati da ritornare sono: ", res);
+
+        return res;
+    };
 
     return (
         <Box
             component='form'
+            onSubmit={handleSubmit(handleSubmitReg)}
             sx={{
                 position: 'relative',
                 display: 'flex',
@@ -38,68 +51,46 @@ export default function SignIn() {
                 p: 2,
             }}
         >
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={2}
+            <Stack spacing={2}
+                sx={{
+                    height: '100%',
+                    width: '100%',
+                    borderRadius: 2,
+                }}>
+                <ControllerField
+                    control={control}
+                    name="emailUser"
+                    label="Name"
+                    setValue={updateValues}
+                    rules={{ required: "Email obbligatoria" }}
                     sx={{
-                        height: '100%',
-                        width: '100%',
+                        backgroundColor: common.white,
                         borderRadius: 2,
-                    }}>
-                    <Controller
-                        name="nameUser"
-                        control={control}
-                        defaultValue={userSignIn.email}
-                        rules={{ required: "Email obbligatoria" }}
-                        render={({ field, fieldState }) => (
-                            <TextField
-                                {...field}
-                                sx={{
-                                    backgroundColor: 'white',
-                                    borderRadius: 2,
-                                }}
-                                label="email"
-                                type="email"
-                                fullWidth
-                                error={!!fieldState.error}
-                                helperText={fieldState.error?.message}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    field.onChange(value); // 🔑 aggiorna react-hook-form
-                                    setUserSignIn(prev => ({ ...prev, emailUser: value }));
-                                }}
-                            />
-                        )}
-                    />
-                    <Controller
-                        name="passwordUser"
-                        control={control}
-                        defaultValue={userSignIn.password}
-                        rules={{ required: "Password obbligatoria" }}
-                        render={({ field, fieldState }) => (
-                            <TextField
-                                {...field}
-                                sx={{
-                                    backgroundColor: 'white',
-                                    borderRadius: 2,
-                                    '& input::placeholder': {
-                                        fontSize: '1rem', // oppure '16px', '18px', ecc.
-                                    },
-                                }}
-                                label="password"
-                                type="password"
-                                fullWidth
-                                error={!!fieldState.error}
-                                helperText={fieldState.error?.message}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    field.onChange(value); // 🔑 aggiorna react-hook-form
-                                    setUserSignIn(prev => ({ ...prev, passwordUser: value }));
-                                }}
-                            />
-                        )}
-                    />
-                </Stack>
-            </form>
+                    }}
+                    fullWidth={true}
+                    type={"text"}
+                />
+                <ControllerField
+                    control={control}
+                    name="passwordUser"
+                    label="Password"
+                    setValue={updateValues}
+                    rules={{ required: "Password obbligatoria" }}
+                    sx={{
+                        backgroundColor: common.white,
+                        borderRadius: 2,
+                    }}
+                    fullWidth={true}
+                    type={"password"}
+                />
+                <Button
+                    type="submit"
+                    color={"success"}
+                    variant={"contained"}
+                >
+                    Registry
+                </Button>
+            </Stack>
         </Box>
     );
 };

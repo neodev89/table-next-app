@@ -48,9 +48,16 @@ type InvoiceTable = {
     invoiceDirection: string;
 };
 
+type login = {
+    idlogin: string;
+    user: string;
+    password: string;
+}
+
 export type {
     FreelanceTable,
     FreelanceRegistry,
     BusinessData,
-    InvoiceTable
+    InvoiceTable,
+    login,
 }

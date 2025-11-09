@@ -1,16 +1,7 @@
 Schema delle tabelle in cui effettuare operazioni CRUD:
-    1. Tabella principale
-    create table FreelanceTable (
-	    freelanceID int primary key,
-        businessYearStart date not null,
-        businessYearEnd date not null,
-        companyStart date not null,
-        companyEnd date not null
-    );
-
-    2. Tabella registro Freelance 
+    1. Tabella freelance - tabella principale -
     create table FreelanceRegistry (
-        freelanceRegistryID int primary key,
+        freelanceRegistryID varchar(255) primary key,
         nameUser varchar(20) not null,
         lastNameUser varchar(20) not null,
         taxID varchar(50) not null,
@@ -20,38 +11,51 @@ Schema delle tabelle in cui effettuare operazioni CRUD:
         countryUser varchar(100) not null,
         emailUser varchar(100) not null,
         passwordUser varchar(20) not null,
-        foreign key (freelanceRegistryID) references FreelanceTable(freelanceID)
+    );
+   
+
+    2. Tabella registro Freelance
+    create table FreelanceTable (
+	    freelanceID varchar(255) PRIMARY KEY,
+        businessYearStart DATE NOT NULL,
+        businessYearEnd DATE NOT NULL,
+        companyStart DATE NOT NULL,
+        companyEnd DATE NOT NULL,
+        freelanceRegistryID varchar(255),
+        FOREIGN KEY (freelanceRegistryID) REFERENCES FreelanceRegistry(freelanceRegistryID)
     );
 
     3. Tabella dati e costi del Freelance
     create table businessData (
-        businessDataID int primary key,
-        taxable int not null,
-        vat int not null,
-        total int not null,
-        foodExpense int,
-        personnellExpense int,
-        variousExpense int,
-        dailyFee int,
-        monthlyFee int,
-        monthlyPayment int,
-        monthlyDivisiblePayment int,
-        ordinaryRegime boolean not null,
-        forfaitRegime boolean not null,
-        simplifiedRegime boolean not null,
-        foreign key (businessDataID) references FreelanceRegistry(freelanceRegistryID)
+        businessDataID varchar(255) PRIMARY KEY,
+        taxable INT NOT NULL,
+        vat INT NOT NULL,
+        total INT NOT NULL,
+        foodExpense INT,
+        personnellExpense INT,
+        variousExpense INT,
+        dailyFee INT,
+        monthlyFee INT,
+        monthlyPayment INT,
+        monthlyDivisiblePayment INT,
+        ordinaryRegime BOOLEAN NOT NULL,
+        forfaitRegime BOOLEAN NOT NULL,
+        simplifiedRegime BOOLEAN NOT NULL,
+        freelanceRegistryID varchar(255),
+        FOREIGN KEY (freelanceRegistryID) REFERENCES FreelanceRegistry(freelanceRegistryID)
     );
 
     4. Tabella per il salvataggio delle fatture
     create table invoiceTable (
-        invoiceID int primary key,
-        taxable int not null,
-        vat int not null,
-        total int not null,
-        foodExpense int,
-        variousExpense int,
-        stampExpense int,
-        print boolean,
-        invoiceDirection varchar(15) not null,
-        foreign key (invoiceID) references businessData(businessDataID)
+        invoiceID varchar(255) PRIMARY KEY,
+        taxable INT NOT NULL,
+        vat INT NOT NULL,
+        total INT NOT NULL,
+        foodExpense INT,
+        variousExpense INT,
+        stampExpense INT,
+        print BOOLEAN,
+        invoiceDirection VARCHAR(15) NOT NULL,
+        businessDataID varchar(255),
+        FOREIGN KEY (businessDataID) REFERENCES businessData(businessDataID)
     );

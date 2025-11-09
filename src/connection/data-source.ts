@@ -1,13 +1,9 @@
 import 'reflect-metadata';
-import { BusinessDataEntity } from '@/entity/businessData';
-import { FreelanceRegistryEntity } from '@/entity/freelanceRegistry';
-import { FreelanceTableEntity } from '@/entity/freelanceTable';
-import { InvoiceTableEntity } from '@/entity/invoiceTable';
-import { DataSource } from 'typeorm';
+import { DataSource, EntitySchema } from 'typeorm';
 
 let AppDataSource: DataSource | undefined = undefined;
 
-export const getInitializedAppData = async () => {
+export const getInitializedAppData = async (entities: (string | Function | EntitySchema<any>)[]) => {
     if (AppDataSource && AppDataSource.isInitialized) {
         return AppDataSource;
     }
@@ -18,7 +14,7 @@ export const getInitializedAppData = async () => {
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        entities: [FreelanceTableEntity, FreelanceRegistryEntity, BusinessDataEntity, InvoiceTableEntity]
+        entities: entities
     });
 
     AppDataSource = await dataSource.initialize();
