@@ -1,8 +1,7 @@
-import { Entity, JoinColumn, ManyToOne } from "typeorm";
-import { PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Column } from "typeorm";
 import { FreelanceRegistry } from "./freelanceRegistry";
 
-@Entity('signIn')
+@Entity('signin')
 export class SignIn {
 
     @PrimaryGeneratedColumn('uuid')

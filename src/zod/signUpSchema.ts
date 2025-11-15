@@ -17,8 +17,8 @@ export const signUpSchema = z.object({
 });
 
 export const signInSchema = z.object({
-    email: emailUserSchema,
-    password: passwordUserSchema,
+    emailUser: emailUserSchema,
+    passwordUser: passwordUserSchema,
 });
 
 export type SignUpSchemaProps = z.infer<typeof signUpSchema>;

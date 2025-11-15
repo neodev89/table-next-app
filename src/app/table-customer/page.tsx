@@ -6,7 +6,7 @@ const TableUser: React.FC = () => {
 
     return (
         <Box className={style.containerTable}>
-            <Typography variant="h3">Home</Typography>
+            <Typography variant="h3">Table</Typography>
         </Box>
     )
 };

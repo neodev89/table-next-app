@@ -1,44 +1,49 @@
 import { singInFreelance } from "@/global-state/freelanceSignIn";
-import styles from "./styles.module.sass";
-import { initializerSignInUser, signInSchema, SignInSchemaProps, signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
+import { signInSchema, SignInSchemaProps, SignUpSchemaProps } from "@/zod/signUpSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Stack, TextField } from "@mui/material";
-import { ChangeEvent, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Box, Button, Stack } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { ControllerField } from "../controller-field/ControllerField";
 import { common } from "@mui/material/colors";
+import { useRouter } from "next/navigation";
 
 export default function SignIn() {
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const updateValues = (name: keyof SignUpSchemaProps, value: string | number) => {
         dispatch(singInFreelance({ [name]: value } as SignInSchemaProps));
-    }
+    };
 
     const { control, handleSubmit } = useForm<SignInSchemaProps>({
-        resolver: zodResolver(signInSchema)
+        resolver: zodResolver(signInSchema),
+        defaultValues: {
+            emailUser: "",
+            passwordUser: "",
+        }
     });
 
     const handleSubmitReg = async (data: SignInSchemaProps) => {
         dispatch(singInFreelance(data))
-        const req = await fetch("/api/sign-in", {
+        const res = await fetch("/api/sign-in", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify(data),
         });
-        const res: SignInSchemaProps = await req.json();
+        const datas = await res.json();
         console.log("I dati da ritornare sono: ", res);
-
+        if (res.ok) router.replace(datas.redirectTo);
         return res;
     };
 
     return (
         <Box
-            component='form'
+            component={'form'}
             onSubmit={handleSubmit(handleSubmitReg)}
             sx={{
                 position: 'relative',

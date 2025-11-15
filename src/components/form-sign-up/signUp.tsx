@@ -1,9 +1,8 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { initializerSignUpUser, signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
-import { Box, Button, Grid, Stack, TextField } from "@mui/material";
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
+import { Box, Button, Grid } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Items } from "../items-grid/Items";
 import { ControllerField } from "../controller-field/ControllerField";
@@ -12,6 +11,11 @@ import { signUpNewFreelance } from "@/global-state/freelanceRegistrySlice";
 
 export default function SignUp() {
     const dispatch = useDispatch();
+
+    const updateValues = (name: keyof SignUpSchemaProps, value: string | number) => {
+        dispatch(signUpNewFreelance({ [name]: value } as SignUpSchemaProps));
+    };
+
     const { control, handleSubmit } = useForm<SignUpSchemaProps>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
@@ -26,10 +30,6 @@ export default function SignUp() {
             passwordUser: "",
         }
     });
-
-    const updateValues = (name: keyof SignUpSchemaProps, value: string | number) => {
-        dispatch(signUpNewFreelance({ [name]: value } as SignUpSchemaProps));
-    }
 
     const handleSubmitReg = async (data: SignUpSchemaProps) => {
         dispatch(signUpNewFreelance(data));
