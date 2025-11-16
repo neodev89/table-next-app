@@ -1,10 +1,10 @@
-@function opacityColors ($red, $green, $blue)
-    $colors()
-    @for $i from 1 through 10
-        $alpha: $i * 0.1
-        $color: rgba($red, $green, $blue, $alpha)
-        $colors: append($colors, $color)
-    @return $colors
+// @function opacityColors ($red, $green, $blue)
+//     $colors()
+//     @for $i from 1 through 10
+//         $alpha: $i * 0.1
+//         $color: rgba($red, $green, $blue, $alpha)
+//         $colors: append($colors, $color)
+//     @return $colors
 
 @mixin default-display (
     $display,
@@ -18,3 +18,46 @@
     flex-direction: #{$direction}
     justify-content: #{$j-content}
     align-items: #{$a-items}
+
+@mixin display-center 
+    display: flex
+    justify-content: center
+    align-items: center
+
+@mixin display-right-start 
+    display: flex
+    justify-content: right
+    align-items: flex-start
+
+@mixin display-end-start
+    display: flex
+    justify-content: flex-end
+    align-items: flex-start
+
+@mixin display-center-start 
+    display: flex
+    justify-content: center
+    align-items: flex-start
+
+@mixin default-text-div 
+    position: relative
+    display: flex
+    text-align: center
+    height: auto
+    width: 100%
+    align-items: center
+    justify-content: center
+
+@mixin default-title-text 
+    position: relative
+    display: flex
+    height: 95%
+    width: 100%
+    justify-content: center
+    align-items: center
+    font-family: var(--font-montserrat)
+    text-align: center
+
+@mixin default-inter-number 
+    font-family: var(--font-inter)
+    text-align: center 

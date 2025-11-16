@@ -2,6 +2,7 @@ import Home from "./home/page";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { ContentWrapper } from "@/components/wrapper/ContentWrapper";
+import { CtxProvider } from "@/components/contextBackground/ctx";
 
 
 export default async function App() {
@@ -13,7 +14,9 @@ export default async function App() {
 
   return (
     <ContentWrapper>
-      <Home />
+      <CtxProvider>
+        <Home />
+      </CtxProvider>
     </ContentWrapper>
   );
 }
