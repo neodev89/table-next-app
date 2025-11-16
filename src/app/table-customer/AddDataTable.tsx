@@ -2,7 +2,7 @@
 import style from "./style.module.sass";
 import { Stack, Box, Typography, Button } from "@mui/material";
 import { common } from "@mui/material/colors";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const AddDataTable = () => {
     {/**Qui andranno inseriti i dati per popolare il database
@@ -16,14 +16,14 @@ const AddDataTable = () => {
                 <Typography variant="h3" className={style.textTitle}>
                     Table
                 </Typography>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={
-                        redirect("/")
-                    }>
-                    Indietro
-                </Button>
+                <Link href={"/"}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                    >
+                        Indietro
+                    </Button>
+                </Link>
             </Box>
             <Box className={style.table_div}>
                 <Typography variant="h5" className={style.textTitle}>
