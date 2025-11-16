@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { ControllerField } from "../controller-field/ControllerField";
 import { common } from "@mui/material/colors";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function SignIn() {
 
@@ -36,9 +36,9 @@ export default function SignIn() {
             body: JSON.stringify(data),
         });
         const datas = await res.json();
-        console.log("I dati da ritornare sono: ", res);
-        if (res.ok) router.replace(datas.redirectTo);
-        return res;
+        console.log("I dati da ritornare sono: ", datas);
+        if (res.ok && datas.token) redirect("/table-customer");
+        return datas;
     };
 
     return (

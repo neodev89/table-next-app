@@ -1,5 +1,5 @@
 "use client";
-import CodeHome from "@/components/code-home/codeHome";
+import CodeHome from "@/ui/components/code-home/codeHome";
 import store from "@/global-state/store";
 import theme from "@/themeMui";
 import { ThemeProvider } from "@mui/material"

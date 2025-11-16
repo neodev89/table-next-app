@@ -1,5 +1,5 @@
 import Login from "../login/page";
-import styles from "../../app/home/style.module.sass";
+import styles from "../../../app/home/style.module.sass"
 import { Box, CircularProgress, Grid, Button, Typography } from "@mui/material";
 
 interface codeHomeProps {

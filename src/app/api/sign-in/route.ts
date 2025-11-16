@@ -83,15 +83,15 @@ export async function POST(req: Request) {
                 {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
-                    sameSite: 'strict',
+                    sameSite: 'lax',
                     path: "/",
                     maxAge: 2 * 24 * 60 * 60,
                 }
             );
 
             return NextResponse.json({
+                token,
                 success: true,
-                redirectTo: "/table-customer"
             });
         };
     } catch (error) {
