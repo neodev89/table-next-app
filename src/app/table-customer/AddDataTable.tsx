@@ -1,4 +1,5 @@
 "use client";
+import FormAddTable from "@/ui/pages/form-add-table";
 import style from "./style.module.sass";
 import { Stack, Box, Typography, Button } from "@mui/material";
 import { common } from "@mui/material/colors";
@@ -26,9 +27,7 @@ const AddDataTable = () => {
                 </Link>
             </Box>
             <Box className={style.table_div}>
-                <Typography variant="h5" className={style.textTitle}>
-                    Form inserimento dati
-                </Typography>
+                <FormAddTable />
             </Box>
         </Stack>
     )
