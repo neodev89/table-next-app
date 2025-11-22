@@ -1,4 +1,5 @@
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import "./style.sass";
 
 import { InputAdornment, SxProps, TextField } from "@mui/material";
 import { common } from "@mui/material/colors";
@@ -51,9 +52,9 @@ const ControlledTextField = ({
                                 top: "8px",
                             },
                         },
-                        input: {
-                            endAdornment: <CalendarTodayIcon sx={{ color: "black" }} />,
-                        },
+                        // input: {
+                        //     endAdornment: <CalendarTodayIcon sx={{ color: "black" }} />,
+                        // },
                     }}
                     sx={{
                         backgroundColor: "transparent",
@@ -62,7 +63,12 @@ const ControlledTextField = ({
                         cursor: "pointer",
                         "& .MuiSvgIcon-root": {
                             color: "black", // ✅ forza il colore dell’icona calendario
+                            backgroundColor: common.white,
                         },
+                        "& .MuiOutlinedInput-input": {
+                            color: common.black,
+                            backgroundColor: common.white,
+                        }
                     }}
                 />
             )}

@@ -7,18 +7,21 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "@/global-state/persist-store";
 
 export default function Providers(
-    { children }: { children: React.ReactNode }
+  { children }: { children: React.ReactNode }
 ) {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-        {children}
-        </LocalizationProvider>
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {children}
+          </LocalizationProvider>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }

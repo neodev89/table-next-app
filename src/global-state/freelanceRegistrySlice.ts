@@ -3,7 +3,7 @@ import { signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-interface FreelanceRegistryState {
+export interface FreelanceRegistryState {
   current: SignUpSchemaProps;
   history: SignUpSchemaProps[];
 }
