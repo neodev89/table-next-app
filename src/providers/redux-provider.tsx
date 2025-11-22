@@ -10,9 +10,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "@/global-state/persist-store";
 
-export default function Providers(
-  { children }: { children: React.ReactNode }
-) {
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

@@ -1,6 +1,11 @@
 import Login from "../login/page";
 import styles from "../../../app/home/style.module.sass"
 import { Box, CircularProgress, Grid, Button, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateLogoutLoading } from "@/global-state/loadingSetting";
+import { useSelector } from "react-redux";
+import { RootZodState } from "@/global-state/store";
 
 interface codeHomeProps {
     loading: boolean;
@@ -13,6 +18,12 @@ export default function CodeHome({
     login,
     setLogin,
 }: codeHomeProps) {
+    const dispatch = useDispatch();
+    const loaded = useSelector((state: RootZodState) => state.loaded.logoutLoading);
+    useEffect(() => {
+        dispatch(updateLogoutLoading(false));
+    }, [loaded]);
+
     return (
         <>
             {

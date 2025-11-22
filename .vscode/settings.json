@@ -4,6 +4,7 @@
         "freelanceregistry",
         "freelancetable",
         "persistor",
+        "sloggato",
         "uuidv"
     ]
 }

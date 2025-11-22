@@ -6,12 +6,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { ControllerField } from "../controller-field/ControllerField";
 import { common } from "@mui/material/colors";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { updateLoading } from "@/global-state/loadingSetting";
 
 export default function SignIn() {
-
     const dispatch = useDispatch();
-    const router = useRouter();
 
     const updateValues = (name: keyof SignUpSchemaProps, value: string | number) => {
         dispatch(singInFreelance({ [name]: value } as SignInSchemaProps));
@@ -35,9 +34,13 @@ export default function SignIn() {
             credentials: "include",
             body: JSON.stringify(data),
         });
+        if (res.ok) {
+            dispatch(updateLoading(true));
+        }
         const datas = await res.json();
         console.log("I dati da ritornare sono: ", datas);
         if (res.ok && datas.token) redirect("/table-customer");
+        dispatch(updateLoading(false));
         return datas;
     };
 

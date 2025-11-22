@@ -1,11 +1,13 @@
 'use client';
 import styles from "./style.module.sass";
-
-import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material"
-import { useState } from "react";
-import { blue, common, grey, red } from "@mui/material/colors";
 import SignIn from "../form-sign-in/signIn";
 import SignUp from "../form-sign-up/signUp";
+
+import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material"
+import { useEffect, useState } from "react";
+import { blue, common, grey, red } from "@mui/material/colors";
+import { useSelector } from "react-redux";
+import { RootZodState } from "@/global-state/store";
 
 interface loginBool {
     setLogin: (login: boolean) => void;
@@ -16,10 +18,14 @@ export default function Login({
 }: loginBool) {
     const [loading, setLoading] = useState<boolean>(false);
     const [sign, setSign] = useState<'sign-in' | 'sign-up'>('sign-in');
-
+    const loaded = useSelector((state: RootZodState) => state.loaded.loading);
     const handleGoBack = () => {
         setLogin(false);
     };
+
+    useEffect(() => {
+        setLoading(loaded);
+    }, [loaded]);
 
     return (
         <>
@@ -48,7 +54,6 @@ export default function Login({
                                     color="warning"
                                     onClick={() => {
                                         handleGoBack();
-                                        setLoading(true);
                                     }}
                                     className={styles.toBack}
                                 >
