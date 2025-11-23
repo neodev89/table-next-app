@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { ControllerField } from "../controller-field/ControllerField";
 import { common } from "@mui/material/colors";
 import { redirect } from "next/navigation";
-import { updateLoading } from "@/global-state/loadingSetting";
+import { updateLogoutLoading } from "@/global-state/loadingSetting";
 
 export default function SignIn() {
     const dispatch = useDispatch();
@@ -35,12 +35,12 @@ export default function SignIn() {
             body: JSON.stringify(data),
         });
         if (res.ok) {
-            dispatch(updateLoading(true));
+            dispatch(updateLogoutLoading(true));
         }
         const datas = await res.json();
         console.log("I dati da ritornare sono: ", datas);
         if (res.ok && datas.token) redirect("/table-customer");
-        dispatch(updateLoading(false));
+        dispatch(updateLogoutLoading(false));
         return datas;
     };
 

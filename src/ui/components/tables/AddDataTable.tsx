@@ -1,20 +1,25 @@
 "use client";
 import FormAddTable from "@/ui/pages/form-add-table";
-import style from "./style.module.sass";
+import style from "../../../app/table-customer/style.module.sass";
+import storePersist from "@/global-state/persist-store";
+
 import { Stack, Box, Typography, Button, CircularProgress } from "@mui/material";
-import { common } from "@mui/material/colors";
 import { redirect } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootZodState } from "@/global-state/store";
-import { useState } from "react";
 import { updateLogoutLoading } from "@/global-state/loadingSetting";
+import { montserrat } from "@/app/fonts";
 
 const AddDataTable = () => {
     {/**Qui andranno inseriti i dati per popolare il database
         con tutte le info necessarie per l'app */}
     const dispatch = useDispatch();
-    const loaded = useSelector((state: RootZodState) => state.loaded.logoutLoading);
+    const loaded = useSelector((state: RootZodState) => state.loaded.loading);
+
+    storePersist.subscribe(() => {
+        console.log("Stato aggiornato:", storePersist.getState());
+    });
 
     const handleLogout = async () => {
         dispatch(updateLogoutLoading(true));
@@ -25,6 +30,7 @@ const AddDataTable = () => {
             },
         });
         if (res.ok) {
+            dispatch(updateLogoutLoading(false));
             redirect("/");
         } else {
             dispatch(updateLogoutLoading(false));
@@ -37,12 +43,14 @@ const AddDataTable = () => {
             {
                 !loaded ? (
                     <Stack className={style.containerTable} sx={{
-                        backgroundColor: common.black
+                        backgroundColor: "transparent"
                     }} spacing={2}>
                         <Box className={style.title}>
-                            <Typography variant="h3" className={style.textTitle}>
-                                Table
-                            </Typography>
+                            <Box className={style.boxTitle}>
+                                <Typography variant="h3" className={style.textTitle}>
+                                    <strong>Table</strong>
+                                </Typography>
+                            </Box>
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -56,7 +64,16 @@ const AddDataTable = () => {
                             <FormAddTable />
                         </Box>
                     </Stack>
-                ) : <CircularProgress />
+                ) : <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                    width: '100vw',
+                    border: '3px solid red'
+                }}>
+                    <CircularProgress size={80} color="info" />
+                </Box>
             }
         </>
     )

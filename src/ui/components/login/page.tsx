@@ -16,30 +16,26 @@ interface loginBool {
 export default function Login({
     setLogin
 }: loginBool) {
-    const [loading, setLoading] = useState<boolean>(false);
     const [sign, setSign] = useState<'sign-in' | 'sign-up'>('sign-in');
-    const loaded = useSelector((state: RootZodState) => state.loaded.loading);
+    const loaded = useSelector((state: RootZodState) => state.loaded.logoutLoading);
+    
     const handleGoBack = () => {
         setLogin(false);
     };
 
-    useEffect(() => {
-        setLoading(loaded);
-    }, [loaded]);
-
     return (
         <>
             <Box className={styles.login_box}>
-                {loading ? (
+                {loaded ? (
                     <Box sx={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                         height: '100vh',
                         width: '100vw',
-                        border: '1px solid white'
+                        border: '3px solid red'
                     }}>
-                        <CircularProgress size={80} />
+                        <CircularProgress size={80} color="info" />
                     </Box>
                 ) :
                     (

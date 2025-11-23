@@ -1,9 +1,8 @@
 "use client";
 import ControlledTextField from "../components/controller-field/controllerFormField";
 
-import { FC, useState } from "react"
+import { FC } from "react"
 import { freelanceTableSchema, freelanceTableSchemaProps, initializerFreelanceTable } from "@/zod/freelanceTable";
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { common } from "@mui/material/colors";
@@ -12,8 +11,7 @@ import { montserrat } from "@/app/fonts";
 
 
 const FormAddTable: FC = () => {
-    const [freelanceTableState, setFreelanceTableState] = useState<freelanceTableSchemaProps>(initializerFreelanceTable);
-    const arrayInitialState = Object.entries(freelanceTableState).map(([K, V]) => ({
+    const arrayInitialState = Object.entries(initializerFreelanceTable).map(([K, V]) => ({
         [K]: V
     }));
 

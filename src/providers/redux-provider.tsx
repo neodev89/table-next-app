@@ -9,11 +9,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "@/global-state/persist-store";
+import { CircularProgress } from "@mui/material";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<CircularProgress size={50} />} persistor={persistor} onBeforeLift={() => {
+  console.log("Persist completato, stato:", store.getState())}}>
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             {children}

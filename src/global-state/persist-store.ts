@@ -1,4 +1,3 @@
-import storage from "redux-persist/lib/storage";
 import freelanceReducer,
 {
     type FreelanceRegistryState
@@ -18,6 +17,7 @@ import {
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { signUpSchema } from "@/zod/signUpSchema";
 import dataExtrapolation from "@/utils/dataExtrapolation";
+import { storagePersist } from "@/lib/persist-config";
 
 // Transform: valida con Zod al momento della reidratazione
 const freelanceTransform = createTransform<FreelanceRegistryState, FreelanceRegistryState>(
@@ -43,7 +43,7 @@ const freelanceTransform = createTransform<FreelanceRegistryState, FreelanceRegi
 
 const freelanceRegistrySliceConfig: PersistConfig<FreelanceRegistryState> = {
     key: "freelanceRegistry",
-    storage,
+    storage: storagePersist,
     whitelist: ["current", "history"],
     transforms: [freelanceTransform],
     version: 1, // incrementa se cambi la shape dello stato
@@ -54,7 +54,7 @@ const rootRegistryReducer = combineReducers({
     freelanceRegistry: persistReducer(freelanceRegistrySliceConfig, freelanceReducer),
 });
 
-export const store = configureStore({
+export const storePersist = configureStore({
     reducer: rootRegistryReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -64,8 +64,8 @@ export const store = configureStore({
         }),
 });
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(storePersist);
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export default store;
+export type RootState = ReturnType<typeof storePersist.getState>;
+export type AppDispatch = typeof storePersist.dispatch;
+export default storePersist;
