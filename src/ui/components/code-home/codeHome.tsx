@@ -15,9 +15,9 @@ export default function CodeHome({
 }: codeHomeProps) {
 
     useEffect(() => {
-        setLogin(!login);
+        setLogin(false);
     }, []);
-
+    
     return (
         <>
             {

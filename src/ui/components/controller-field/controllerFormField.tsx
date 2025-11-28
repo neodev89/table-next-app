@@ -50,6 +50,7 @@ const ControlledTextField = ({
                             shrink: type === "date" ? true : undefined,
                             sx: {
                                 top: "8px",
+                                fontWeight: 600,
                             },
                         },
                         // input: {

@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { RootZodState } from "@/global-state/store";
 import { updateLogoutLoading } from "@/global-state/loadingSetting";
 import { montserrat } from "@/app/fonts";
+import { lightBlue, teal } from "@mui/material/colors";
+import TableContainer from "../table-container/tableContainer";
 
 const AddDataTable = () => {
     {/**Qui andranno inseriti i dati per popolare il database
@@ -43,15 +45,16 @@ const AddDataTable = () => {
             {
                 !loaded ? (
                     <Stack className={style.containerTable} sx={{
-                        backgroundColor: "transparent"
+                        backgroundColor: "rgb(0, 0, 94)"
                     }} spacing={2}>
                         <Box className={style.title}>
                             <Box className={style.boxTitle}>
-                                <Typography variant="h3" className={style.textTitle}>
+                                <Typography variant="h2" className={style.textTitle}>
                                     <strong>Table</strong>
                                 </Typography>
                             </Box>
-                            <Button
+                            <Box className={style.logout}>
+                                <Button
                                 variant="contained"
                                 color="primary"
                                 type="submit"
@@ -59,10 +62,11 @@ const AddDataTable = () => {
                             >
                                 Logout
                             </Button>
+                            </Box>
                         </Box>
-                        <Box className={style.table_div}>
+                        <TableContainer className={style.table_div}>
                             <FormAddTable />
-                        </Box>
+                        </TableContainer>
                     </Stack>
                 ) : <Box sx={{
                     display: 'flex',

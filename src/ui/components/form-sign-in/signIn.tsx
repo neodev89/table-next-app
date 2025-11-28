@@ -25,7 +25,8 @@ export default function SignIn() {
     });
 
     const handleSubmitReg = async (data: SignInSchemaProps) => {
-        dispatch(singInFreelance(data))
+        dispatch(singInFreelance(data));
+        dispatch(updateLogoutLoading(true));
         const res = await fetch("/api/sign-in", {
             method: "POST",
             headers: {
@@ -64,6 +65,9 @@ export default function SignIn() {
                     height: '100%',
                     width: '100%',
                     borderRadius: 2,
+                    justifyContent: 'center',
+                    backgroundColor: 'rgba(255, 255, 255, 0.52)',
+                    p: 1,
                 }}>
                 <ControllerField
                     control={control}

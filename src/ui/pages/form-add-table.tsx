@@ -9,7 +9,6 @@ import { common } from "@mui/material/colors";
 import { Box, Button, Grid, Stack, TextField } from "@mui/material";
 import { montserrat } from "@/app/fonts";
 
-
 const FormAddTable: FC = () => {
     const arrayInitialState = Object.entries(initializerFreelanceTable).map(([K, V]) => ({
         [K]: V
@@ -22,7 +21,7 @@ const FormAddTable: FC = () => {
         companyEnd: "Data di fine anno aziendale",
     };
 
-    const { control, getValues, handleSubmit } = useForm<freelanceTableSchemaProps>({
+    const { control, handleSubmit } = useForm<freelanceTableSchemaProps>({
         resolver: zodResolver(freelanceTableSchema),
     });
 
@@ -35,7 +34,7 @@ const FormAddTable: FC = () => {
             component={"form"}
             onSubmit={handleSubmit(onSubmit)}
             sx={{
-                backgroundColor: common.white,
+                backgroundColor: "transparent",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
@@ -61,7 +60,10 @@ const FormAddTable: FC = () => {
                         width: "50%",
                         flexDirection: "row",
                         justifyContent: "center",
-                        border: "2px solid blue"
+                        border: "2px solid blue",
+                        backgroundColor: common.white,
+                        p: 1,
+                        borderRadius: 4,
                     }}>
                         <Grid container spacing={1} columns={4}>
                             {
@@ -78,7 +80,7 @@ const FormAddTable: FC = () => {
                                                 width: "100%",
                                                 alignItems: "center",
                                                 px: 2,
-                                                border: "1px solid black",
+                                                // border: "1px solid black",
                                             }}>
                                                 <TextField
                                                     value={`${fieldLabels[description]}`}
@@ -87,6 +89,13 @@ const FormAddTable: FC = () => {
                                                     fullWidth
                                                     sx={{
                                                         mr: 1,
+                                                    }}
+                                                    slotProps={{
+                                                        input: {
+                                                            sx: {
+                                                                fontWeight: 500
+                                                            }
+                                                        }
                                                     }}
                                                 />
                                                 <ControlledTextField

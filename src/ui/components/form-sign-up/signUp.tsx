@@ -192,7 +192,7 @@ export default function SignUp() {
                         <ControllerField
                             control={control}
                             name={"emailUser"}
-                            label={"email"}
+                            label={"Email"}
                             type={"email"}
                             setValue={updateValues}
                             rules={{ required: "email required" }}
@@ -209,7 +209,7 @@ export default function SignUp() {
                         <ControllerField
                             control={control}
                             name={"passwordUser"}
-                            label={"password"}
+                            label={"Password"}
                             type={"password"}
                             setValue={updateValues}
                             rules={{ required: "password required" }}
@@ -224,7 +224,13 @@ export default function SignUp() {
                 <Grid size={{ xs: 12, md: 4 }}>
                 </Grid>
                 <Grid size={{ xs: 12 }}>
-                    <Items>
+                    <Box sx={{
+                        position: "relative",
+                        display: "flex",
+                        width: "100%",
+                        justifyContent: "center",
+                        
+                    }}>
                         <Button
                             type="submit"
                             color={"success"}
@@ -232,7 +238,7 @@ export default function SignUp() {
                         >
                             Registry
                         </Button>
-                    </Items>
+                    </Box>
                 </Grid>
             </Grid>
         </Box>
