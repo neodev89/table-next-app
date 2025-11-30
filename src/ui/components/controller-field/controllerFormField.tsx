@@ -6,7 +6,7 @@ import { common } from "@mui/material/colors";
 import { Theme } from "@mui/system";
 import { Control, Controller, RegisterOptions } from "react-hook-form";
 
-interface ControlledTextFieldProps {
+export interface ControlledTextFieldProps {
     control: Control<any>;
     name: keyof Record<string, any>;
     rules: RegisterOptions;

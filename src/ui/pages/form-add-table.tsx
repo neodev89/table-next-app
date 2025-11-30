@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { common } from "@mui/material/colors";
 import { Box, Button, Grid, Stack, TextField } from "@mui/material";
 import { montserrat } from "@/app/fonts";
+import MappingTextField from "../components/custom-textField/mappingTextField";
 
 const FormAddTable: FC = () => {
     const arrayInitialState = Object.entries(initializerFreelanceTable).map(([K, V]) => ({
@@ -27,7 +28,7 @@ const FormAddTable: FC = () => {
 
     const onSubmit = () => {
         console.log("OK")
-    }
+    };
 
     return (
         <Box
@@ -72,41 +73,16 @@ const FormAddTable: FC = () => {
                                     console.log(description);
                                     return (
                                         <Grid size={4} key={`${idx}-${item}`}>
-                                            <Box sx={{
-                                                position: "relative",
-                                                display: "flex",
-                                                flexDirection: "row",
-                                                height: "5rem",
-                                                width: "100%",
-                                                alignItems: "center",
-                                                px: 2,
-                                                // border: "1px solid black",
-                                            }}>
-                                                <TextField
-                                                    value={`${fieldLabels[description]}`}
-                                                    disabled
-                                                    variant="standard"
-                                                    fullWidth
-                                                    sx={{
-                                                        mr: 1,
-                                                    }}
-                                                    slotProps={{
-                                                        input: {
-                                                            sx: {
-                                                                fontWeight: 500
-                                                            }
-                                                        }
-                                                    }}
-                                                />
-                                                <ControlledTextField
-                                                    control={control}
-                                                    name={String(idx)}
-                                                    rules={{ required: `${description} is required` }}
-                                                    type={"date"}
-                                                    label={`${fieldLabels[description]}`}
-                                                    fullWidth={true}
-                                                />
-                                            </Box>
+                                            <MappingTextField
+                                                control={control}
+                                                name={String(idx)}
+                                                rules={{ required: `${description} is required` }}
+                                                type={"date"}
+                                                label={`${fieldLabels[description]}`}
+                                                fullWidth={true}
+                                                fieldLabel={`${fieldLabels[description]}`}
+                                                visible={true}
+                                            />
                                         </Grid>
                                     )
                                 })

@@ -1,8 +1,9 @@
 "use client";
 import CodeHome from "@/ui/components/code-home/codeHome";
+
 import { updateLogoutLoading } from "@/global-state/loadingSetting";
 import { RootZodState } from "@/global-state/store";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Box, CircularProgress } from "@mui/material";
@@ -18,9 +19,9 @@ const Home = () => {
         console.log(login);
     }, [dispatch]);
 
-    const setterLoading = useCallback(() => {
-        dispatch(updateLogoutLoading(!loadedLoading));
-    }, [loadedLoading]);
+    // const setterLoading = useCallback(() => {
+    //     dispatch(updateLogoutLoading(!loadedLoading));
+    // }, [loadedLoading]);
 
     return (
         <>
@@ -28,7 +29,7 @@ const Home = () => {
                 loadedLoading ? (
                     <Box sx={{
                         display: 'flex',
-                        height: '100%',
+                        height: 'calc(100vh - 100px)',
                         width: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',

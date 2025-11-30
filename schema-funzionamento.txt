@@ -1,0 +1,15 @@
+L'App in questione dovrà eseguire dei calcoli per il conto delle imposta forfait:
+    1. Imposta sostitutiva al 5% o al 15%;
+    2. Contribuiti INPS (e.g. 26%);
+    3. Acconti imposta sostitutiva;
+    4. Acconti Contributi INPS;
+    5. Coprire i costi del Commercialista;
+    6. Se l'anno è già il secondo e oltre sottrarre gli acconti versati
+        nell'anno precedente;
+
+Oltre le imposte da versare l'App dovrà eseguire:
+    1. Calcolare il "guadagno";
+    2. Ripartirlo per almeno 13 mensilità;
+    3. Coprire i costi delle mensilità non lavorate;
+    4. Coprire i costi delle spese sostenute durante l'attività lavorativa;
+    5. Accantonare risparmi;

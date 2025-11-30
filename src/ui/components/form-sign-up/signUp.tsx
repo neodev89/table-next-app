@@ -2,21 +2,33 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, SignUpSchemaProps } from "@/zod/signUpSchema";
 import { Box, Button, Grid } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Control, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Items } from "../items-grid/Items";
 import { ControllerField } from "../controller-field/ControllerField";
 import { common } from "@mui/material/colors";
 import { signUpNewFreelance } from "@/global-state/freelanceRegistrySlice";
+import { useEffect, useState } from "react";
+import setTypeField from "@/utils/setTypeFileds";
+import setLogicLabel from "@/utils/setLogicLabel";
+
+interface mappedProps {
+    control: Control<SignUpSchemaProps>;
+    name: keyof SignUpSchemaProps;
+    label: string;
+    type: "email" | "password" | "date" | "number" | "text";
+    setValues: (name: keyof SignUpSchemaProps, value: string | number) => void;
+}
 
 export default function SignUp() {
+    const [mappedState, setMappedState] = useState<mappedProps[] | []>([]);
     const dispatch = useDispatch();
 
     const updateValues = (name: keyof SignUpSchemaProps, value: string | number) => {
         dispatch(signUpNewFreelance({ [name]: value } as SignUpSchemaProps));
     };
 
-    const { control, handleSubmit } = useForm<SignUpSchemaProps>({
+    const { control, handleSubmit, getValues } = useForm<SignUpSchemaProps>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
             nameUser: "",
@@ -30,6 +42,25 @@ export default function SignUp() {
             passwordUser: "",
         }
     });
+
+    useEffect(() => {
+        const processField = async () => {
+            const mappedState = await Promise.all(Object.keys(getValues()).map(async (K) => {
+                const filteredType = await setTypeField(K)
+                const newObj = {
+                    control: control,
+                    name: K as keyof SignUpSchemaProps,
+                    label: K.replace(/User$/, ""),
+                    type: filteredType,
+                    setValues: updateValues,
+                };
+                return newObj;
+            }));
+            setMappedState(mappedState as mappedProps[]);
+        };
+        processField();
+    }, []);
+
 
     const handleSubmitReg = async (data: SignUpSchemaProps) => {
         dispatch(signUpNewFreelance(data));
@@ -67,160 +98,30 @@ export default function SignUp() {
                 borderRadius: 2,
                 py: 1,
             }}>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name="nameUser"
-                            label="Name"
-                            setValue={updateValues}
-                            rules={{ required: "name obbligatorio" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"text"}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name="lastNameUser"
-                            label="Last Name"
-                            setValue={updateValues}
-                            rules={{ required: "lastName required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"text"}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"taxID"}
-                            label={"Tax ID"}
-                            setValue={updateValues}
-                            rules={{ required: "Tax ID required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"text"}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"vatNumber"}
-                            label={"Vat Number"}
-                            setValue={updateValues}
-                            rules={{ required: "Vat Number required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"text"}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"birthUser"}
-                            label={"Birth"}
-                            setValue={updateValues}
-                            rules={{ required: "Birth required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"date"}
-                            placeholder=""
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"birthCityUser"}
-                            label={"Birth City"}
-                            setValue={updateValues}
-                            rules={{ required: "Birth City required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"text"}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"countryUser"}
-                            label={"Country User"}
-                            setValue={updateValues}
-                            rules={{ required: "Country User required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                            type={"text"}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"emailUser"}
-                            label={"Email"}
-                            type={"email"}
-                            setValue={updateValues}
-                            rules={{ required: "email required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                        />
-                    </Items>
-                </Grid>
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Items>
-                        <ControllerField
-                            control={control}
-                            name={"passwordUser"}
-                            label={"Password"}
-                            type={"password"}
-                            setValue={updateValues}
-                            rules={{ required: "password required" }}
-                            sx={{
-                                backgroundColor: common.white,
-                                borderRadius: 2,
-                            }}
-                            fullWidth={true}
-                        />
-                    </Items>
-                </Grid>
+                {mappedState?.map((item, idx) => {
+                    console.log("I dati sono: ", item);
+                    return (
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Items>
+                                <ControllerField
+                                    key={idx}
+                                    control={item.control}
+                                    name={`${item.name}`}
+                                    label={setLogicLabel(item.label)}
+                                    setValue={item.setValues}
+                                    rules={{ required: "name obbligatorio" }}
+                                    sx={{
+                                        backgroundColor: common.white,
+                                        borderRadius: 2,
+                                    }}
+                                    fullWidth={true}
+                                    type={"text"}
+                                />
+                            </Items>
+                        </Grid>
+                    )
+                })
+                }
                 <Grid size={{ xs: 12, md: 4 }}>
                 </Grid>
                 <Grid size={{ xs: 12 }}>
@@ -229,7 +130,7 @@ export default function SignUp() {
                         display: "flex",
                         width: "100%",
                         justifyContent: "center",
-                        
+
                     }}>
                         <Button
                             type="submit"

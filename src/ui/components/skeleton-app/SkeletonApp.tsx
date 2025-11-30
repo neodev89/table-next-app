@@ -1,8 +1,13 @@
+import WrapperComponent from "../wrapper/WrapperComponent";
 import { Box, Stack } from "@mui/material";
 import { ReactNode } from "react"
+import { ContentWrapper } from "../wrapper/ContentWrapper";
+// import { grey } from "@mui/material/colors";
 
 interface skeletonAppProps {
+    navbar: ReactNode;
     children: ReactNode;
+    footer: ReactNode;
 }
 
 const SkeletonApp = (props: skeletonAppProps) => {
@@ -13,12 +18,41 @@ const SkeletonApp = (props: skeletonAppProps) => {
      */}
 
     return (
-        <Stack spacing={1}>
-            <Box></Box>
-            <Box>
-                {props.children}
-            </Box>
-            <Box></Box>
-        </Stack>
+        <ContentWrapper>
+            <WrapperComponent>
+                <Stack spacing={1} sx={{
+                    height: "100%",
+                    width: "max-content",
+                    backgroundColor: "transparent",
+                }}>
+                    <Box sx={{
+                        position: "fixed",
+                        display: "flex",
+                        height: "80px",
+                        width: "max-content",
+                        backgroundColor: "transparent"
+                    }}>
+                        {props.navbar}
+                    </Box>
+                    <Box sx={{
+                        position: "relative",
+                        display: "flex",
+                        height: "calc(100vh - 300px)",
+                        width: "100%",
+                    }}>
+                        {props.children}
+                    </Box>
+                    <Box sx={{
+                        position: "fixed",
+                        display: "flex",
+                        height: "220px",
+                        width: "100%",
+                    }}>
+                        {props.footer}
+                    </Box>
+                </Stack>
+            </WrapperComponent>
+        </ContentWrapper>
     );
 };
+export default SkeletonApp;
