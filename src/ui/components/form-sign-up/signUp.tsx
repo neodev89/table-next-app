@@ -9,10 +9,10 @@ import { ControllerField } from "../controller-field/ControllerField";
 import { common } from "@mui/material/colors";
 import { signUpNewFreelance } from "@/global-state/freelanceRegistrySlice";
 import { useEffect, useState } from "react";
-import setTypeField from "@/utils/setTypeFileds";
+import setTypeField from "@/utils/setTypeFields";
 import setLogicLabel from "@/utils/setLogicLabel";
 
-interface mappedProps {
+export interface mappedProps {
     control: Control<SignUpSchemaProps>;
     name: keyof SignUpSchemaProps;
     label: string;

@@ -20,24 +20,42 @@
     align-items: #{$a-items}
 
 @mixin display-center 
+    position: relative
     display: flex
     justify-content: center
     align-items: center
 
 @mixin display-right-start 
+    position: relative
     display: flex
     justify-content: right
     align-items: flex-start
 
 @mixin display-end-start
+    position: relative
     display: flex
     justify-content: flex-end
     align-items: flex-start
 
 @mixin display-center-start 
+    position: relative
     display: flex
     justify-content: center
     align-items: flex-start
+
+@mixin display-between 
+    position: relative
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+
+@mixin display-evenly 
+    position: relative
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+    align-items: center
 
 @mixin default-text-div 
     position: relative

@@ -12,8 +12,7 @@ $isShadow: false
 
 .table_div
     position: relative
-    @include mix.display-center-start
-    width: 100%
+    display: flex
     background-color: transparent
     
 
@@ -44,6 +43,10 @@ $isShadow: false
 .logout
     position: relative
     display: flex
-    width: 10%
-    justify-content: flex-end
-    padding-right: 15px
+
+.buttonsDiv
+    position: relative
+    @include mix.display-evenly
+    height: 5rem
+    width: 100%
+    

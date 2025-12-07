@@ -9,13 +9,14 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootZodState } from "@/global-state/store";
 import { updateLogoutLoading } from "@/global-state/loadingSetting";
-import { montserrat } from "@/app/fonts";
-import { lightBlue, teal } from "@mui/material/colors";
-import TableContainer from "../table-container/tableContainer";
+import { useCallback, useState } from "react";
+import ModalBusiness from "../modals/ModalBusiness";
+
 
 const AddDataTable = () => {
     {/**Qui andranno inseriti i dati per popolare il database
         con tutte le info necessarie per l'app */}
+    const [open, setOpen] = useState<boolean>(false);
     const dispatch = useDispatch();
     const loaded = useSelector((state: RootZodState) => state.loaded.loading);
 
@@ -40,6 +41,10 @@ const AddDataTable = () => {
         }
     };
 
+    const handleClose = useCallback(() => {
+        setOpen(false);
+    }, [open]);
+
     return (
         <>
             {
@@ -53,20 +58,26 @@ const AddDataTable = () => {
                                     <strong>Table</strong>
                                 </Typography>
                             </Box>
+                        </Box>
+                        <Box className={style.buttonsDiv}>
+                            <Box className={style.table_div}>
+                                <Button variant="contained" color="primary"
+                                    onClick={() => setOpen(true)}
+                                >
+                                    Modale
+                                </Button>
+                            </Box>
                             <Box className={style.logout}>
                                 <Button
-                                variant="contained"
-                                color="primary"
-                                type="submit"
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </Button>
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </Button>
                             </Box>
                         </Box>
-                        <TableContainer className={style.table_div}>
-                            <FormAddTable />
-                        </TableContainer>
                     </Stack>
                 ) : <Box sx={{
                     display: 'flex',
@@ -79,6 +90,12 @@ const AddDataTable = () => {
                     <CircularProgress size={80} color="info" />
                 </Box>
             }
+            <ModalBusiness
+                open={open}
+                setOpen={setOpen}
+                closed={handleClose}
+                className={style.table_div}
+            />
         </>
     )
 };

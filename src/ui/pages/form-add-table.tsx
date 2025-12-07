@@ -1,14 +1,14 @@
 "use client";
-import ControlledTextField from "../components/controller-field/controllerFormField";
+
+import MappingTextField from "../components/custom-textField/mappingTextField";
 
 import { FC } from "react"
 import { freelanceTableSchema, freelanceTableSchemaProps, initializerFreelanceTable } from "@/zod/freelanceTable";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { common } from "@mui/material/colors";
-import { Box, Button, Grid, Stack, TextField } from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import { montserrat } from "@/app/fonts";
-import MappingTextField from "../components/custom-textField/mappingTextField";
 
 const FormAddTable: FC = () => {
     const arrayInitialState = Object.entries(initializerFreelanceTable).map(([K, V]) => ({
@@ -41,7 +41,7 @@ const FormAddTable: FC = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
-                height: "calc(100vh - 150px)",
+                height: "100%",
                 border: "3px solid orange",
             }}
         >
