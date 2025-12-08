@@ -1,9 +1,8 @@
 "use client";
-import FormAddTable from "@/ui/pages/form-add-table";
 import style from "../../../app/table-customer/style.module.sass";
 import storePersist from "@/global-state/persist-store";
 
-import { Stack, Box, Typography, Button, CircularProgress } from "@mui/material";
+import { Stack, Box, Typography, Button } from "@mui/material";
 import { redirect } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -11,6 +10,7 @@ import { RootZodState } from "@/global-state/store";
 import { updateLogoutLoading } from "@/global-state/loadingSetting";
 import { useCallback, useState } from "react";
 import ModalBusiness from "../modals/ModalBusiness";
+import { SafeDynamicCircular } from "../client-only-wrapper";
 
 
 const AddDataTable = () => {
@@ -78,6 +78,7 @@ const AddDataTable = () => {
                                 </Button>
                             </Box>
                         </Box>
+                    
                     </Stack>
                 ) : <Box sx={{
                     display: 'flex',
@@ -87,7 +88,7 @@ const AddDataTable = () => {
                     width: '100vw',
                     border: '3px solid red'
                 }}>
-                    <CircularProgress size={80} color="info" />
+                    <SafeDynamicCircular size={80} color="info" />
                 </Box>
             }
             <ModalBusiness

@@ -6,7 +6,8 @@ import { RootZodState } from "@/global-state/store";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { SafeDynamicCircular } from "@/ui/components/client-only-wrapper";
 
 const Home = () => {
     const [login, setLogin] = useState<boolean>(true);
@@ -34,10 +35,13 @@ const Home = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                        <CircularProgress size={80} sx={{
+                        <SafeDynamicCircular size={80} sx={{
                             justifyContent: 'center',
                             color: 'error'
                         }} />
+                        <Typography variant="body1" color="secondary">
+                            ...Wait few seconds
+                        </Typography>
                     </Box>
                 ) : (
                     <CodeHome login={login} setLogin={setLogin} />

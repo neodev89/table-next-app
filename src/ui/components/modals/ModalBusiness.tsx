@@ -1,9 +1,11 @@
-import FormAddTable from "@/ui/pages/form-add-table";
+import FormAddTable from "@/ui/components/form-data-table/form-add-table";
 import TableContainer from "../table-container/tableContainer";
+import style from "./style.module.sass";
+import CloseIcon from '@mui/icons-material/Close';
 
-import { Box, Dialog, DialogContent, DialogTitle, Paper, PaperProps, Slide, styled } from "@mui/material";
+import { Box, Dialog, DialogContent, DialogTitle, IconButton, Paper, Slide, styled, Typography } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import { forwardRef, ReactNode } from "react";
+import { forwardRef } from "react";
 
 interface modalProps {
   open: boolean;
@@ -24,15 +26,14 @@ const Transition = forwardRef(function Transition(
 const ModalBusiness = ({
   open,
   closed,
-  className,
 }: modalProps) => {
 
   const CustomPaper = styled(Paper)({
-  minWidth: '100vw',
-  minHeight: '70vh',
-  display: 'flex',
-  flexDirection: 'column',
-});
+    position: 'absolute',
+    minWidth: '100vw',
+    height: 'calc(100vh - 100px)',
+    top: '15%',
+  });
 
   return (
     <Dialog
@@ -43,25 +44,40 @@ const ModalBusiness = ({
         paper: CustomPaper,
       }}
       slotProps={{
-        root: {
+        container: {
           sx: {
-            width: 700,
-            height: 700,
-            top: "12%",
+            top: 0,
             right: 0,
-            left: "27%",
+            left: 0,
           }
         }
       }}
 
     >
       <DialogTitle>
-        I dati di inizio e fine dell'anno di attività della tua impresa
+        <Box className={style.div_title}>
+          <Box className={style.title}>
+            <Typography variant="body1" fontWeight={600}>
+              I dati di inizio e fine dell'anno di attività della tua impresa
+            </Typography>
+          </Box>
+          <Box className={style.close}>
+            <IconButton onClick={() => {
+              closed();
+            }}>
+              <CloseIcon color="error" fontSize="medium" />
+            </IconButton>
+          </Box>
+        </Box>
       </DialogTitle>
       <DialogContent>
-        <TableContainer className={className}>
-          <FormAddTable />
+        <TableContainer className={""}>
+          <FormAddTable 
+            classNameBoxCarousel={style.action} 
+            classNameActionCarousel={style.action_carousel} 
+          />
         </TableContainer>
+        
       </DialogContent>
     </Dialog>
   );

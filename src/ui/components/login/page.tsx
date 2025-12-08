@@ -3,11 +3,12 @@ import styles from "./style.module.sass";
 import SignIn from "../form-sign-in/signIn";
 import SignUp from "../form-sign-up/signUp";
 
-import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material"
-import { useEffect, useState } from "react";
+import { Box, Button, Stack, Typography } from "@mui/material"
+import { useState } from "react";
 import { blue, common, grey, red } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 import { RootZodState } from "@/global-state/store";
+import { SafeDynamicCircular } from "../client-only-wrapper";
 
 interface loginBool {
     setLogin: (login: boolean) => void;
@@ -35,7 +36,8 @@ export default function Login({
                         width: '100vw',
                         // border: '3px solid red'
                     }}>
-                        <CircularProgress size={80} color="primary" />
+                        <SafeDynamicCircular size={80} color="primary" />
+                        <Typography variant="body1" color="secondary">...Wait few second</Typography>
                     </Box>
                 ) :
                     (

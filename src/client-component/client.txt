@@ -1,0 +1,64 @@
+📋 Lista di componenti tipici client-only (non utili lato SSR)
+🌀 Loader e indicatori di stato
+CircularProgress, LinearProgress (MUI)
+
+Skeleton loaders (Skeleton di MUI, react-loading-skeleton)
+
+Spinners e indicatori di caricamento generici
+
+👉 Non hanno senso lato server perché mostrano solo uno stato transitorio.
+
+🎛 Componenti interattivi basati su browser
+Modali (Dialog, Modal di MUI, Radix Dialog)
+
+Tooltip, Popover, Dropdown
+
+Snackbar, Toast notifications
+
+Stepper, Tabs con animazioni
+
+DatePicker, TimePicker (dipendono da window e locale)
+
+👉 Dipendono da eventi utente e API del browser, quindi SSR non serve.
+
+🎨 Componenti con animazioni runtime
+Grafici (recharts, chart.js, victory, nivo)
+
+Mappe (react-leaflet, google-maps-react)
+
+Caroselli/slider (swiper, react-slick)
+
+Lottie animations (lottie-react)
+
+👉 Generano markup diverso tra server e client → meglio client-only.
+
+🌍 Componenti che leggono direttamente da window o document
+useMediaQuery (MUI) → calcola breakpoints runtime
+
+react-responsive → dipende da viewport
+
+Componenti che usano localStorage, sessionStorage
+
+Redux Persist PersistGate con loader dinamico
+
+👉 Non possono essere coerenti lato server.
+
+🔐 Componenti di autenticazione/contesto runtime
+Login modals con OAuth popup
+
+Componenti che leggono cookie lato client (document.cookie)
+
+Feature flags caricati da localStorage
+
+👉 La protezione vera la fai lato server, ma la UI di login è client-only.
+
+!!!
+Se un componente:
+
+Non ha valore SEO (non contiene testo/markup utile ai crawler).
+
+Dipende da API del browser (window, document, localStorage).
+
+Mostra solo stati transitori o animazioni (loader, skeleton, grafici).
+
+→ allora è candidato perfetto per dynamic(..., { ssr: false }).

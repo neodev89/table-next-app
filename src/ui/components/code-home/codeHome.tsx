@@ -1,7 +1,7 @@
 import Login from "../login/page";
 import styles from "../../../app/home/style.module.sass"
 
-import { Box, CircularProgress, Grid, Button, Typography } from "@mui/material";
+import { Box, Grid, Button, Typography } from "@mui/material";
 import { useEffect } from "react";
 
 interface codeHomeProps {

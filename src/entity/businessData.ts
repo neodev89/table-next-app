@@ -1,6 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Relation } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { FreelanceRegistry } from "./freelanceRegistry";
-import { InvoiceTable } from "./invoiceTable";
 
 @Entity('businessdata')
 export class BusinessData {
