@@ -31,8 +31,8 @@ const ModalBusiness = ({
   const CustomPaper = styled(Paper)({
     position: 'absolute',
     minWidth: '100vw',
-    height: 'calc(100vh - 100px)',
-    top: '15%',
+    height: 'calc(100vh - 50px)',
+    top: '10%',
   });
 
   return (
@@ -49,6 +49,8 @@ const ModalBusiness = ({
             top: 0,
             right: 0,
             left: 0,
+            overflowY: "scroll",
+            overflowX: "auto"
           }
         }
       }}
@@ -72,12 +74,8 @@ const ModalBusiness = ({
       </DialogTitle>
       <DialogContent>
         <TableContainer className={""}>
-          <FormAddTable 
-            classNameBoxCarousel={style.action} 
-            classNameActionCarousel={style.action_carousel} 
-          />
+          <FormAddTable />
         </TableContainer>
-        
       </DialogContent>
     </Dialog>
   );

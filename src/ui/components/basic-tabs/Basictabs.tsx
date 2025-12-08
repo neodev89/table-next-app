@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Stack, Tab, Tabs } from "@mui/material";
 
 interface tabPanelProps {
     tabsData: Array<{
@@ -8,6 +8,8 @@ interface tabPanelProps {
         children: ReactNode;
     }>;
     currentValue: string;
+    value?: string;
+    setValue?: (value: string) => void;
 };
 
 function CustomTabPanel({
@@ -16,52 +18,77 @@ function CustomTabPanel({
 }: tabPanelProps) {
 
     return (
-        <>
+        <Box sx={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: '100%',
+            typography: 'body1',
+            border: "2px solid green",
+        }}>
             {
                 tabsData.map((item, idx) => {
                     return (
-                        <div
+                        <Box component="div"
                             role="tabpanel"
                             hidden={item.value !== currentValue}
                             id={`simple-tabpanel-${idx}`}
                             aria-labelledby={`simple-tab-${idx}`}
                         >
                             {item.value === currentValue && <Box sx={{ p: 3 }}>{item.children}</Box>}
-                        </div>
+                        </Box>
                     )
                 })
             }
-        </>
+        </Box>
     );
 }
 
 const BasicTabs = ({
     tabsData,
     currentValue,
+    value,
+    setValue,
+
 }: tabPanelProps) => {
-    const [value, setValue] = useState<string>(tabsData[0].value ?? "");
 
     const handleChange = (_e: React.SyntheticEvent, currentValue: string) => {
-        setValue(currentValue);
+        setValue?.(currentValue);
     };
 
     return (
         <Box sx={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             width: '100%',
-            typography: 'body1'
+            typography: 'body1',
+            border: "2px solid violet",
         }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+
+            <Stack spacing={1} sx={{
+                alignItems: "center",
+            }}>
                 <Tabs value={value} onChange={handleChange}>
                     {
                         tabsData.map((item, idx) => {
                             return (
-                                <Tab id={`${idx}`} label={item.label} value={item.value} />
+                                <Tab
+                                    id={`${idx}-${item.value}`}
+                                    label={item.label}
+                                    value={item.value}
+                                />
                             )
                         })
                     }
                 </Tabs>
-                <CustomTabPanel tabsData={tabsData} currentValue={currentValue} />
-            </Box>
+                <CustomTabPanel
+                    tabsData={tabsData}
+                    currentValue={currentValue}
+                />
+            </Stack>
         </Box>
     );
 };

@@ -11,7 +11,7 @@ interface carouselProps {
 
 const CarouselData = ({
     initializerFreelanceTable,
-    control
+    control,
 }: carouselProps) => {
 
     const arrayInitialState = Object.entries(initializerFreelanceTable).map(([K, V]) => ({
@@ -26,11 +26,12 @@ const CarouselData = ({
     };
 
     return (
-        <Box sx={{
+        <Box
+            sx={{
             position: "relative",
             display: "flex",
             height: "100%",
-            width: "50%",
+            width: "100%",
             flexDirection: "row",
             justifyContent: "center",
             border: "2px solid blue",
